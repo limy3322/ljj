@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>刘娟娟的个人主页</title>
+    <title>Jane的个人主页</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -11,7 +11,7 @@
 <body class="bg-gray-100 h-screen flex flex-col">
     <header class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">刘娟娟的个人空间</h1>
+            <h1 class="text-2xl font-bold">Jane的个人空间</h1>
             <!-- Mobile menu button -->
             <button id="mobile-menu-button" class="md:hidden focus:outline-none">
                 <i class="fas fa-bars text-2xl"></i>
@@ -24,39 +24,39 @@
         <nav id="sidebar" class="bg-white w-1/4 md:w-64 shadow-lg p-2 md:p-4 flex flex-col transform -translate-x-full md:translate-x-0 fixed md:relative h-full z-30 transition-transform duration-300 ease-in-out">
             <div class="text-center mb-3 md:mb-6">
                 <div class="w-16 h-16 md:w-28 md:h-28 rounded-full overflow-hidden mx-auto mb-2 md:mb-3 border-2 md:border-4 border-purple-400">
-                    <img id="avatar" src="avatar1.jpg" alt="刘娟娟" class="w-full h-full object-cover">
+                    <img id="avatar" src="avatar1.jpg" alt="Jane" class="w-full h-full object-cover">
                 </div>
-                <h2 class="text-sm md:text-xl font-semibold text-gray-800">刘娟娟</h2>
+                <h2 class="text-sm md:text-xl font-semibold text-gray-800">Jane</h2>
                 <p class="text-xs md:text-sm text-gray-600 hidden md:block">1990年 · 徒步爱好者</p>
             </div>
             
             <ul class="space-y-3 md:space-y-2 flex-1">
                 <li>
-                    <a href="javascript:void(0)" onclick="loadPageAndClose('home.html', this)" class="nav-link active flex items-center p-2 md:p-3 rounded-lg">
+                    <a href="#" data-page="home.html" class="nav-link active flex items-center p-2 md:p-3 rounded-lg">
                         <i class="fas fa-home w-5 md:w-6 text-center"></i>
                         <span class="text-sm md:text-base ml-2 md:ml-2">首页</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)" onclick="loadPageAndClose('about.html', this)" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
+                    <a href="#" data-page="about.html" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
                         <i class="fas fa-user w-5 md:w-6 text-center"></i>
                         <span class="text-sm md:text-base ml-2 md:ml-2">关于我</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)" onclick="loadPageAndClose('hobby.html', this)" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
+                    <a href="#" data-page="hobby.html" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
                         <i class="fas fa-heart w-5 md:w-6 text-center"></i>
                         <span class="text-sm md:text-base ml-2 md:ml-2">我的爱好</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)" onclick="loadPageAndClose('gallery.html', this)" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
+                    <a href="#" data-page="gallery.html" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
                         <i class="fas fa-images w-5 md:w-6 text-center"></i>
                         <span class="text-sm md:text-base ml-2 md:ml-2">相册</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)" onclick="loadPageAndClose('contact.html', this)" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
+                    <a href="#" data-page="contact.html" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
                         <i class="fas fa-envelope w-5 md:w-6 text-center"></i>
                         <span class="text-sm md:text-base ml-2 md:ml-2">联系我</span>
                     </a>
@@ -92,6 +92,7 @@
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
+        const contentFrame = document.getElementById('content-frame');
         
         function toggleMobileMenu() {
             sidebar.classList.toggle('-translate-x-full');
@@ -105,36 +106,27 @@
         // Navigation links
         const navLinks = document.querySelectorAll('.nav-link');
         
-        // New function that loads page and closes mobile menu
-        function loadPageAndClose(url, linkElement) {
-            // Load the page
-            document.getElementById('content-frame').src = url;
-            
-            // Update active nav link
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            linkElement.classList.add('active');
-            
-            // Close mobile menu if on mobile
-            if (window.innerWidth < 768) {
-                toggleMobileMenu();
-            }
-        }
-        
-        // The old function is kept for backward compatibility
-        function loadPage(url) {
-            document.getElementById('content-frame').src = url;
-            
-            // Update active nav link based on URL
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                const linkUrl = link.getAttribute('onclick').split("'")[1];
-                if (linkUrl === url) {
-                    link.classList.add('active');
+        // Add click event to all navigation links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get the page to load from data attribute
+                const pageUrl = this.getAttribute('data-page');
+                
+                // Update iframe src
+                contentFrame.src = pageUrl;
+                
+                // Update active state
+                navLinks.forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Close mobile menu if on mobile
+                if (window.innerWidth < 768) {
+                    toggleMobileMenu();
                 }
             });
-        }
+        });
         
         // Handle window resize to ensure correct sidebar state
         window.addEventListener('resize', function() {

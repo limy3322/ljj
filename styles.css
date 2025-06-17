@@ -1,0 +1,67 @@
+/* Custom styles for Liu Juanjuan's personal website */
+
+/* Active navigation link style */
+.nav-link {
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    background-color: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+}
+
+.nav-link.active {
+    background-color: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+    font-weight: 600;
+}
+
+/* Custom animation for content transitions */
+iframe {
+    transition: opacity 0.3s;
+}
+
+iframe.loading {
+    opacity: 0.6;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8b5cf6;
+}
+
+/* Card hover effects */
+.hover-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Image hover zoom effect */
+.img-hover-zoom {
+    overflow: hidden;
+}
+
+.img-hover-zoom img {
+    transition: transform 0.5s ease;
+}
+
+.img-hover-zoom:hover img {
+    transform: scale(1.05);
+} 

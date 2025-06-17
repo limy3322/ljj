@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刘娟娟的个人主页</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 h-screen flex flex-col">
+    <header class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">刘娟娟的个人空间</h1>
+        </div>
+    </header>
+    
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Navigation Sidebar -->
+        <nav class="bg-white w-64 shadow-lg p-4 flex flex-col">
+            <div class="text-center mb-6">
+                <div class="w-28 h-28 rounded-full overflow-hidden mx-auto mb-3 border-4 border-purple-400">
+                    <img id="avatar" src="avatar.jpg" alt="刘娟娟" class="w-full h-full object-cover">
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800">刘娟娟</h2>
+                <p class="text-sm text-gray-600">1990年 · 徒步爱好者</p>
+            </div>
+            
+            <ul class="space-y-2 flex-1">
+                <li>
+                    <a href="javascript:loadPage('home.html')" class="nav-link active flex items-center p-3 rounded-lg">
+                        <i class="fas fa-home w-6"></i>
+                        <span>首页</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:loadPage('about.html')" class="nav-link flex items-center p-3 rounded-lg">
+                        <i class="fas fa-user w-6"></i>
+                        <span>关于我</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:loadPage('hobby.html')" class="nav-link flex items-center p-3 rounded-lg">
+                        <i class="fas fa-heart w-6"></i>
+                        <span>我的爱好</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:loadPage('gallery.html')" class="nav-link flex items-center p-3 rounded-lg">
+                        <i class="fas fa-images w-6"></i>
+                        <span>相册</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:loadPage('contact.html')" class="nav-link flex items-center p-3 rounded-lg">
+                        <i class="fas fa-envelope w-6"></i>
+                        <span>联系我</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="mt-auto pt-4 border-t border-gray-200">
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-purple-600">
+                        <i class="fab fa-weixin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-purple-600">
+                        <i class="fab fa-weibo text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-purple-600">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Main Content with iframe -->
+        <main class="flex-1 overflow-hidden">
+            <iframe id="content-frame" src="home.html" class="w-full h-full border-none"></iframe>
+        </main>
+    </div>
+    
+    <script>
+        function loadPage(url) {
+            document.getElementById('content-frame').src = url;
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html> 

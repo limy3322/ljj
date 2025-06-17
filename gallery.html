@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相册 - 刘娟娟的个人主页</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80%;
+            margin: auto;
+        }
+        
+        .lightbox-controls {
+            color: white;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .lightbox-controls i {
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.2s;
+        }
+        
+        .lightbox-controls i:hover {
+            color: #8b5cf6;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Gallery Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">我的相册</h1>
+            <div class="h-1 w-20 bg-indigo-600 rounded"></div>
+        </div>
+        
+        <!-- Gallery Filter -->
+        <div class="mb-8">
+            <div class="flex flex-wrap justify-center gap-2">
+                <button class="filter-btn active px-4 py-2 rounded-full bg-indigo-600 text-white focus:outline-none" data-filter="all">全部</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-indigo-100 focus:outline-none" data-filter="travel">旅行</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-indigo-100 focus:outline-none" data-filter="food">美食</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-indigo-100 focus:outline-none" data-filter="hiking">徒步</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-indigo-100 focus:outline-none" data-filter="music">音乐</button>
+            </div>
+        </div>
+        
+        <!-- Gallery Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- 个人照片 -->
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="travel">
+                <img src="avatar.jpg" alt="刘娟娟" class="w-full h-64 object-cover" data-img="avatar.jpg">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">个人照片</h3>
+                    <p class="text-gray-500 text-sm">2023年春天</p>
+                </div>
+            </div>
+            
+            <!-- 其他照片 -->
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="travel">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="城市风光" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">城市漫步</h3>
+                    <p class="text-gray-500 text-sm">2022年夏天</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="hiking">
+                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="徒步旅行" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">黄山徒步</h3>
+                    <p class="text-gray-500 text-sm">2022年秋天</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="food">
+                <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="火锅" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">成都火锅</h3>
+                    <p class="text-gray-500 text-sm">2023年1月</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="music">
+                <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="音乐会" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">梁博演唱会</h3>
+                    <p class="text-gray-500 text-sm">2022年8月</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="hiking">
+                <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="自然风光" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">湖边休憩</h3>
+                    <p class="text-gray-500 text-sm">2023年3月</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="food">
+                <img src="https://images.unsplash.com/photo-1556910096-5cdca5b667cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="美食" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1556910096-5cdca5b667cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">早餐时光</h3>
+                    <p class="text-gray-500 text-sm">2023年5月</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="travel">
+                <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="日出" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">山顶日出</h3>
+                    <p class="text-gray-500 text-sm">2022年12月</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="music">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="音乐" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">音乐时光</h3>
+                    <p class="text-gray-500 text-sm">2023年4月</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="hiking">
+                <img src="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="森林徒步" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">森林探索</h3>
+                    <p class="text-gray-500 text-sm">2023年2月</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="food">
+                <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="甜点" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">下午茶</h3>
+                    <p class="text-gray-500 text-sm">2023年6月</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item img-hover-zoom rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="travel">
+                <img src="https://images.unsplash.com/photo-1507608616040-a1d9408ce039?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="城市夜景" class="w-full h-64 object-cover" data-img="https://images.unsplash.com/photo-1507608616040-a1d9408ce039?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
+                <div class="p-3 bg-white">
+                    <h3 class="text-gray-800 font-medium">城市夜景</h3>
+                    <p class="text-gray-500 text-sm">2022年10月</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <img id="lightbox-img" class="lightbox-content" src="" alt="放大照片">
+        <div class="lightbox-controls">
+            <i class="fas fa-arrow-left" id="prev-btn"></i>
+            <i class="fas fa-times" id="close-btn"></i>
+            <i class="fas fa-arrow-right" id="next-btn"></i>
+        </div>
+    </div>
+    
+    <footer class="mt-12 py-6 text-center text-gray-500 text-sm">
+        <p>© 2023 刘娟娟的个人空间 · 保留所有权利</p>
+    </footer>
+    
+    <script>
+        // Gallery filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(btn => btn.classList.remove('active', 'bg-indigo-600', 'text-white'));
+                filterBtns.forEach(btn => btn.classList.add('bg-gray-200', 'text-gray-700'));
+                btn.classList.remove('bg-gray-200', 'text-gray-700');
+                btn.classList.add('active', 'bg-indigo-600', 'text-white');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('close-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const galleryImages = document.querySelectorAll('.gallery-item img');
+        
+        let currentIndex = 0;
+        
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentIndex = index;
+                const imgSrc = item.querySelector('img').getAttribute('data-img');
+                lightboxImg.src = imgSrc;
+                lightbox.style.display = 'flex';
+            });
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            while (window.getComputedStyle(galleryItems[currentIndex]).display === 'none') {
+                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            }
+            const imgSrc = galleryItems[currentIndex].querySelector('img').getAttribute('data-img');
+            lightboxImg.src = imgSrc;
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % galleryItems.length;
+            while (window.getComputedStyle(galleryItems[currentIndex]).display === 'none') {
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+            }
+            const imgSrc = galleryItems[currentIndex].querySelector('img').getAttribute('data-img');
+            lightboxImg.src = imgSrc;
+        });
+        
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                } else if (e.key === 'ArrowRight') {
+                    nextBtn.click();
+                } else if (e.key === 'Escape') {
+                    closeBtn.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

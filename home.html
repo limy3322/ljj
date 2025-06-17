@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - 刘娟娟的个人主页</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+            <div class="md:flex">
+                <div class="md:flex-shrink-0 img-hover-zoom">
+                    <img class="h-64 w-full object-cover md:w-64" src="avatar.jpg" alt="刘娟娟">
+                </div>
+                <div class="p-8 flex flex-col justify-center">
+                    <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">欢迎光临</div>
+                    <h1 class="mt-2 text-4xl leading-tight font-bold text-gray-900">我是刘娟娟</h1>
+                    <p class="mt-4 text-lg text-gray-600">
+                        1990年出生，热爱生活，喜欢徒步，美食爱好者。
+                        <br>相信简单的力量，享受平凡的生活。
+                    </p>
+                    <div class="mt-6">
+                        <a href="javascript:parent.loadPage('about.html')" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                            了解更多 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Highlights Section -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">生活亮点</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Hiking Card -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover-card">
+                <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                    <i class="fas fa-hiking text-xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">徒步爱好者</h3>
+                <p class="text-gray-600">
+                    热爱自然，享受徒步过程中的美景与心灵沉淀。曾徒步过多条著名路线，体验不同风景。
+                </p>
+            </div>
+            
+            <!-- Food Card -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover-card">
+                <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-4">
+                    <i class="fas fa-utensils text-xl text-red-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">美食探索</h3>
+                <p class="text-gray-600">
+                    特别喜欢吃粉和火锅，对不同地方的特色美食充满好奇，愿意尝试各种新鲜的味道。
+                </p>
+            </div>
+            
+            <!-- Music Card -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover-card">
+                <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
+                    <i class="fas fa-music text-xl text-purple-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">音乐欣赏</h3>
+                <p class="text-gray-600">
+                    喜欢听梁博的歌曲，音乐是生活中不可或缺的一部分，能够带来情感共鸣与能量。
+                </p>
+            </div>
+        </div>
+        
+        <!-- Quote Section -->
+        <div class="mt-12 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-md p-8 text-center">
+            <blockquote class="text-white text-xl italic font-medium">
+                "人生是一场旅行，我只愿在沿途，捕捉美丽的风景，品尝独特的味道，聆听动人的音乐。"
+            </blockquote>
+            <p class="text-purple-200 mt-4">— 刘娟娟</p>
+        </div>
+        
+        <!-- Recent Updates -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">最近动态</h2>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <i class="fas fa-mountain text-indigo-500 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-semibold text-gray-800">完成了华山徒步之旅</h4>
+                            <p class="text-gray-600 mt-1">上周末终于完成了期待已久的华山徒步，登顶后的日出是此生难忘的美景！</p>
+                            <span class="text-sm text-gray-400 mt-2 block">2023年8月15日</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <i class="fas fa-fire text-red-500 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-semibold text-gray-800">探访了成都新开的火锅店</h4>
+                            <p class="text-gray-600 mt-1">和朋友一起品尝了成都最新开业的特色火锅，麻辣鲜香，绝对是近期的美食亮点！</p>
+                            <span class="text-sm text-gray-400 mt-2 block">2023年7月28日</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <i class="fas fa-headphones text-purple-500 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-semibold text-gray-800">参加了梁博的演唱会</h4>
+                            <p class="text-gray-600 mt-1">终于如愿以偿参加了偶像梁博的演唱会，现场氛围太棒了，感动到流泪！</p>
+                            <span class="text-sm text-gray-400 mt-2 block">2023年6月10日</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="mt-12 py-6 text-center text-gray-500 text-sm">
+        <p>© 2023 刘娟娟的个人空间 · 保留所有权利</p>
+    </footer>
+</body>
+</html> 

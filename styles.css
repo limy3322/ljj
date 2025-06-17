@@ -64,4 +64,38 @@ iframe.loading {
 
 .img-hover-zoom:hover img {
     transform: scale(1.05);
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    /* Reduce hover effects on mobile for better performance */
+    .hover-card:hover {
+        transform: none;
+    }
+    
+    /* Adjust padding for mobile devices */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Mobile iframe adjustments */
+    iframe {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Make sure images don't overflow on small screens */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Fix for mobile navigation animation */
+@media (max-width: 768px) {
+    body.overflow-hidden {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
 } 

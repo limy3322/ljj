@@ -12,15 +12,19 @@
     <header class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold">刘娟娟的个人空间</h1>
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
         </div>
     </header>
     
     <div class="flex flex-1 overflow-hidden">
-        <!-- Navigation Sidebar -->
-        <nav class="bg-white w-64 shadow-lg p-4 flex flex-col">
+        <!-- Navigation Sidebar - Hidden on mobile by default -->
+        <nav id="sidebar" class="bg-white w-64 shadow-lg p-4 flex flex-col transform -translate-x-full md:translate-x-0 fixed md:relative h-full z-30 transition-transform duration-300 ease-in-out">
             <div class="text-center mb-6">
                 <div class="w-28 h-28 rounded-full overflow-hidden mx-auto mb-3 border-4 border-purple-400">
-                    <img id="avatar" src="avatar.jpg" alt="刘娟娟" class="w-full h-full object-cover">
+                    <img id="avatar" src="avatar1.jpg" alt="刘娟娟" class="w-full h-full object-cover">
                 </div>
                 <h2 class="text-xl font-semibold text-gray-800">刘娟娟</h2>
                 <p class="text-sm text-gray-600">1990年 · 徒步爱好者</p>
@@ -74,22 +78,59 @@
             </div>
         </nav>
         
+        <!-- Overlay for mobile -->
+        <div id="overlay" class="fixed inset-0 bg-black opacity-50 z-20 hidden md:hidden"></div>
+        
         <!-- Main Content with iframe -->
-        <main class="flex-1 overflow-hidden">
+        <main class="flex-1 overflow-hidden w-full">
             <iframe id="content-frame" src="home.html" class="w-full h-full border-none"></iframe>
         </main>
     </div>
     
     <script>
+        // Mobile navigation toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        
+        function toggleMobileMenu() {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
+        
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        overlay.addEventListener('click', toggleMobileMenu);
+        
+        // Navigation links
+        const navLinks = document.querySelectorAll('.nav-link');
+        
         function loadPage(url) {
             document.getElementById('content-frame').src = url;
             
             // Update active nav link
-            document.querySelectorAll('.nav-link').forEach(link => {
+            navLinks.forEach(link => {
                 link.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
+            
+            // Close mobile menu after navigation on mobile
+            if (window.innerWidth < 768) {
+                toggleMobileMenu();
+            }
         }
+        
+        // Handle window resize to ensure correct sidebar state
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            } else if (!sidebar.classList.contains('-translate-x-full')) {
+                // If sidebar is open on mobile
+                overlay.classList.remove('hidden');
+            }
+        });
     </script>
 </body>
 </html> 

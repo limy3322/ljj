@@ -20,50 +20,50 @@
     </header>
     
     <div class="flex flex-1 overflow-hidden">
-        <!-- Navigation Sidebar - Hidden on mobile by default -->
-        <nav id="sidebar" class="bg-white w-full max-w-[240px] md:w-64 shadow-lg p-4 flex flex-col transform -translate-x-full md:translate-x-0 fixed md:relative h-full z-30 transition-transform duration-300 ease-in-out">
-            <div class="text-center mb-4 md:mb-6">
-                <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden mx-auto mb-3 border-4 border-purple-400">
+        <!-- Navigation Sidebar - Hidden by default in mobile view and shown via toggle -->
+        <nav id="sidebar" class="bg-white w-1/4 md:w-64 shadow-lg p-2 md:p-4 flex flex-col transform -translate-x-full md:translate-x-0 fixed md:relative h-full z-30 transition-transform duration-300 ease-in-out">
+            <div class="text-center mb-2 md:mb-6">
+                <div class="w-12 h-12 md:w-28 md:h-28 rounded-full overflow-hidden mx-auto mb-2 md:mb-3 border-2 md:border-4 border-purple-400">
                     <img id="avatar" src="avatar1.jpg" alt="刘娟娟" class="w-full h-full object-cover">
                 </div>
-                <h2 class="text-lg md:text-xl font-semibold text-gray-800">刘娟娟</h2>
-                <p class="text-xs md:text-sm text-gray-600">1990年 · 徒步爱好者</p>
+                <h2 class="text-sm md:text-xl font-semibold text-gray-800">刘娟娟</h2>
+                <p class="text-xs md:text-sm text-gray-600 hidden md:block">1990年 · 徒步爱好者</p>
             </div>
             
             <ul class="space-y-1 md:space-y-2 flex-1">
                 <li>
-                    <a href="javascript:loadPage('home.html')" class="nav-link active flex items-center p-2 md:p-3 rounded-lg">
-                        <i class="fas fa-home w-5 md:w-6"></i>
-                        <span class="text-sm md:text-base">首页</span>
+                    <a href="javascript:loadPage('home.html')" class="nav-link active flex items-center p-1 md:p-3 rounded-lg">
+                        <i class="fas fa-home w-4 md:w-6 text-center"></i>
+                        <span class="text-xs md:text-base ml-1 md:ml-2 hidden sm:inline">首页</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:loadPage('about.html')" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
-                        <i class="fas fa-user w-5 md:w-6"></i>
-                        <span class="text-sm md:text-base">关于我</span>
+                    <a href="javascript:loadPage('about.html')" class="nav-link flex items-center p-1 md:p-3 rounded-lg">
+                        <i class="fas fa-user w-4 md:w-6 text-center"></i>
+                        <span class="text-xs md:text-base ml-1 md:ml-2 hidden sm:inline">关于我</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:loadPage('hobby.html')" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
-                        <i class="fas fa-heart w-5 md:w-6"></i>
-                        <span class="text-sm md:text-base">我的爱好</span>
+                    <a href="javascript:loadPage('hobby.html')" class="nav-link flex items-center p-1 md:p-3 rounded-lg">
+                        <i class="fas fa-heart w-4 md:w-6 text-center"></i>
+                        <span class="text-xs md:text-base ml-1 md:ml-2 hidden sm:inline">我的爱好</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:loadPage('gallery.html')" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
-                        <i class="fas fa-images w-5 md:w-6"></i>
-                        <span class="text-sm md:text-base">相册</span>
+                    <a href="javascript:loadPage('gallery.html')" class="nav-link flex items-center p-1 md:p-3 rounded-lg">
+                        <i class="fas fa-images w-4 md:w-6 text-center"></i>
+                        <span class="text-xs md:text-base ml-1 md:ml-2 hidden sm:inline">相册</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:loadPage('contact.html')" class="nav-link flex items-center p-2 md:p-3 rounded-lg">
-                        <i class="fas fa-envelope w-5 md:w-6"></i>
-                        <span class="text-sm md:text-base">联系我</span>
+                    <a href="javascript:loadPage('contact.html')" class="nav-link flex items-center p-1 md:p-3 rounded-lg">
+                        <i class="fas fa-envelope w-4 md:w-6 text-center"></i>
+                        <span class="text-xs md:text-base ml-1 md:ml-2 hidden sm:inline">联系我</span>
                     </a>
                 </li>
             </ul>
             
-            <div class="mt-auto pt-3 md:pt-4 border-t border-gray-200">
+            <div class="mt-auto pt-2 md:pt-4 border-t border-gray-200 hidden md:block">
                 <div class="flex justify-center space-x-4">
                     <a href="#" class="text-gray-600 hover:text-purple-600">
                         <i class="fab fa-weixin text-lg md:text-xl"></i>
@@ -81,7 +81,7 @@
         <!-- Overlay for mobile -->
         <div id="overlay" class="fixed inset-0 bg-black opacity-50 z-20 hidden md:hidden"></div>
         
-        <!-- Main Content with iframe -->
+        <!-- Main Content with iframe - Takes remaining space (3/4 in mobile) -->
         <main class="flex-1 overflow-hidden w-full">
             <iframe id="content-frame" src="home.html" class="w-full h-full border-none"></iframe>
         </main>
@@ -126,6 +126,12 @@
                 sidebar.classList.remove('-translate-x-full');
                 overlay.classList.add('hidden');
                 document.body.classList.remove('overflow-hidden');
+                
+                // Show text labels on larger screens
+                document.querySelectorAll('.nav-link span').forEach(span => {
+                    span.classList.remove('hidden');
+                    span.classList.add('inline');
+                });
             } else if (!sidebar.classList.contains('-translate-x-full')) {
                 // If sidebar is open on mobile
                 overlay.classList.remove('hidden');
